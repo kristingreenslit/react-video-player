@@ -3,6 +3,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// const API_KEY = '';
+
+const apiKey = config.API_KEY;
+
 // function to create a new class component w/jsx that produces some HTML
 const App = () => {
 	return <div>Hello World!!</div>; 
