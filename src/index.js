@@ -3,13 +3,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// const API_KEY = '';
+// import component with path to search_bar file so that babel is not confused,
+// not needed for library imports above b/c they're namespaced
+import SearchBar from './components/search_bar';
 
 const apiKey = config.API_KEY;
 
 // function to create a new class component w/jsx that produces some HTML
 const App = () => {
-	return <div>Hello World!!</div>; 
+	return (
+		<div>
+			<SearchBar />
+		</div>
+	);
 }
 
 // take component's generated HTML and render it on the page by
