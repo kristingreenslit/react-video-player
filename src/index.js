@@ -9,6 +9,7 @@ import VideoList from './components/video_list';
 
 const apiKey = config.API_KEY;
 
+// moved to constructor function below so that it kicks off immediately
 // YTSearch({key: apiKey, term: 'surfboards'}, function(data) {
 // 	console.log(data);
 // });
@@ -28,16 +29,15 @@ class App extends Component {
 		super(props);
 
 		this.state = { videos: [] };
-		// moved to constructor function so that it kicks off immediately
+
 		YTSearch({key: apiKey, term: 'surfboards'}, (videos) => {
-			// this.setState({ videos: videos}); 
+			// this.setState({ videos: videos});
 			// using ES6 instead to set state to object with new key-value pair, only works when key and variable are the same name
 			this.setState({ videos });
 		});
 	}
-
 	render() {
-		// data passed from parent component, App, to child component, VideoList so that videos can be accessed by VideoList
+		// data passed from parent component, App, to child component below, VideoList so that videos can be accessed by VideoList
 		return (
 			<div>
 				<SearchBar />
