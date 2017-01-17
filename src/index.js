@@ -2,12 +2,17 @@
 // ReactDOM library is also now needed to render HTML in the DOM
 import React from 'react';
 import ReactDOM from 'react-dom';
+import YTSearch from 'youtube-api-search';
 
 // import component with path to search_bar file so that babel is not confused,
 // not needed for library imports above b/c they're namespaced
 import SearchBar from './components/search_bar';
 
 const apiKey = config.API_KEY;
+
+YTSearch({key: apiKey, term: 'surfboards'}, function(data) {
+	console.log(data);
+});
 
 // function to create a new class component w/jsx that produces some HTML
 const App = () => {
