@@ -1,26 +1,50 @@
 // import React as a js module into this file (from node)
 // ReactDOM library is also now needed to render HTML in the DOM
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
-
-// import component with path to search_bar file so that babel is not confused,
-// not needed for library imports above b/c they're namespaced
+// import component with path to search_bar file so that babel is not confused, not needed for library imports above b/c they're namespaced
 import SearchBar from './components/search_bar';
+import VideoList from './components/video_list';
 
 const apiKey = config.API_KEY;
 
-YTSearch({key: apiKey, term: 'surfboards'}, function(data) {
-	console.log(data);
-});
+// YTSearch({key: apiKey, term: 'surfboards'}, function(data) {
+// 	console.log(data);
+// });
 
 // function to create a new class component w/jsx that produces some HTML
-const App = () => {
-	return (
-		<div>
-			<SearchBar />
-		</div>
-	);
+// const App = () => {
+// 	return (
+// 		<div>
+// 			<SearchBar />
+// 		</div>
+// 	);
+// }
+
+// changed to class component so that results of new user search (list of video objects in an array) can be updated with state
+class App extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = { videos: [] };
+		// moved to constructor function so that it kicks off immediately
+		YTSearch({key: apiKey, term: 'surfboards'}, (videos) => {
+			// this.setState({ videos: videos}); 
+			// using ES6 instead to set state to object with new key-value pair, only works when key and variable are the same name
+			this.setState({ videos });
+		});
+	}
+
+	render() {
+		// data passed from parent component, App, to child component, VideoList so that videos can be accessed by VideoList
+		return (
+			<div>
+				<SearchBar />
+				<VideoList videos={this.state.videos} />
+			</div>
+		);
+	}
 }
 
 // take component's generated HTML and render it on the page by
