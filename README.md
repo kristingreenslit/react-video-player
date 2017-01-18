@@ -1,3 +1,3 @@
-## React video player built to refresh understanding of Redux
+# React video player
 
 ### Starter code: https://github.com/StephenGrider/ReduxSimpleStarter
