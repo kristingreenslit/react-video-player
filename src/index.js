@@ -6,6 +6,7 @@ import YTSearch from 'youtube-api-search';
 // import component with path to search_bar file so that babel is not confused, not needed for library imports above b/c they're namespaced
 import SearchBar from './components/search_bar';
 import VideoList from './components/video_list';
+import VideoDetail from './components/video_detail';
 
 const apiKey = config.API_KEY;
 
@@ -41,6 +42,7 @@ class App extends Component {
 		return (
 			<div>
 				<SearchBar />
+				<VideoDetail video={this.state.videos[0]} />
 				<VideoList videos={this.state.videos} />
 			</div>
 		);
