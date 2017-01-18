@@ -26,12 +26,21 @@ class SearchBar extends Component {
 		// when event occurs (event = user enters text)
 		return (
 			<div className="search-bar">
+				{/* input updated below to split event handlers out, separate method below */}
+				{/* <input 
+					value = {this.state.term}
+					onChange={event => this.setState({ term: event.target.value })} /> */}
 				<input 
-				value = {this.state.term}
-				onChange={event => this.setState({ term: event.target.value })} />
+					value = {this.state.term}
+					onChange={event => this.onInputChange(event.target.value)} />
 			</div>
-		)
+		);
 	}
+
+	onInputChange(term) {
+		this.setState({term});
+		this.props.onSearchTermChange(term);
+	} 
 }
 
 // only code exported out of this file is the SearchBar component

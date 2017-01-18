@@ -33,8 +33,12 @@ class App extends Component {
 			videos: [],
 			selectedVideo: null
 		};
+		// initial video search
+		this.videoSearch('surfboards');
+	}
 
-		YTSearch({key: apiKey, term: 'surfboards'}, (videos) => {
+	videoSearch(term) {
+		YTSearch({key: apiKey, term: term}, (videos) => {
 			// this.setState({ videos: videos});
 			// using ES6 instead to set state to object with new key-value pair, only works when key and variable are the same name
 			this.setState({ 
@@ -43,11 +47,14 @@ class App extends Component {
 			});
 		});
 	}
+
 	render() {
-		// data passed from parent component, App, to child component below, VideoList so that videos can be accessed by VideoList
+		// data passed from parent component, App, to child component below:
+		// VideoList so that videos can be accessed by VideoList
+		// SearchBar so that function can be passed that updates results based on new search term
 		return (
 			<div>
-				<SearchBar />
+				<SearchBar onSearchTermChange={term => this.videoSearch(term)} />
 				<VideoDetail video={this.state.selectedVideo} />
 				<VideoList 
 				onVideoSelect={selectedVideo => this.setState({selectedVideo})}
