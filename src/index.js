@@ -1,3 +1,4 @@
+import _ from 'lodash';
 // import React as a js module into this file (from node)
 // ReactDOM library is also now needed to render HTML in the DOM
 import React, { Component } from 'react';
@@ -49,12 +50,17 @@ class App extends Component {
 	}
 
 	render() {
+		// reduces screen flickering/new search on every letter typed in input field
+		const videoSearch = _.debounce((term) => { this.videoSearch(term) }, 300);
+
 		// data passed from parent component, App, to child component below:
 		// VideoList so that videos can be accessed by VideoList
 		// SearchBar so that function can be passed that updates results based on new search term
 		return (
 			<div>
-				<SearchBar onSearchTermChange={term => this.videoSearch(term)} />
+				{/* Search Bar updated to throttle search term results:
+				<SearchBar onSearchTermChange={term => this.videoSearch(term)} /> */}
+				<SearchBar onSearchTermChange={videoSearch} />
 				<VideoDetail video={this.state.selectedVideo} />
 				<VideoList 
 				onVideoSelect={selectedVideo => this.setState({selectedVideo})}
